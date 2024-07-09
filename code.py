@@ -3,7 +3,7 @@ import requests
 import io
 from PIL import Image
 
-st.title('Text to Image') #Title of webpage
+st.title('Text to Image Generator') #Title of webpage
 
 API_URL = "https://api-inference.huggingface.co/models/CompVis/stable-diffusion-v1-4" #API calling
 headers = {"Authorization": "Bearer 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"} #API Token code
