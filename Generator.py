@@ -3,15 +3,19 @@ import requests
 import io
 from PIL import Image
 
-st.title('Text to Image Generator') #Title of webpage
+st.title('Text to Image') #Title of webpage
 
 API_URL = "https://api-inference.huggingface.co/models/CompVis/stable-diffusion-v1-4" #API calling
+API_URL1 = "https://api-inference.huggingface.co/models/hakurei/waifu-diffusion"
 headers = {"Authorization": "Bearer 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"} #API Token code
 
 #Function to check if image is correct
 def query(payload):
     response = requests.post(API_URL, headers=headers, json=payload)
-    if response.status_code == 200: #200 is universal code which represents perfect working image
+    response1 = requests.post(API_URL1, headers=headers, json=payload) 
+    if response1.status_code == 200:
+        return response1.content
+    elif response.status_code == 200: #200 is universal code which represents perfect working image
         return response.content
     else:
         return None
