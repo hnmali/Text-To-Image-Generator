@@ -32,3 +32,5 @@ if st.button("Generate Image"):
             st.error("Cannot display image")
     else:
         st.error("No image bytes received.")
+
+st.write("Created by Himanshu Mali")
