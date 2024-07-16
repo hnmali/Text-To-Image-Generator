@@ -3,12 +3,8 @@ import streamlit as st
 import requests
 import io
 from PIL import Image
-from dotenv import load_dotenv
 
-# Load environment variables from .env file
-load_dotenv()
-
-st.set_page_config(page_title="Text to Image", page_icon="🖼️")
+st.set_page_config(page_title="Text to Image")
 
 # Sidebar for Instructions and Credits
 with st.sidebar:
@@ -23,16 +19,16 @@ st.title('Text to Image Generator with AI')  # Title of the webpage
 
 API_URL1 = "https://api-inference.huggingface.co/models/CompVis/stable-diffusion-v1-4"  # API calling
 API_URL2 = "https://api-inference.huggingface.co/models/hakurei/waifu-diffusion"  # Another API calling
-headers = {"Authorization": f"Bearer {os.getenv('HUGGINGFACE_API_TOKEN')}"}  # Use environment variable for API Token
+headers = {"Authorization": "Bearer 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"}  # API Token
 
 # Function to check if the image is correct
 def query(payload):
     response1 = requests.post(API_URL1, headers=headers, json=payload)
     response2 = requests.post(API_URL2, headers=headers, json=payload)
-    if response2.status_code == 200:  # 200 is the universal code which represents perfect working image
-        return response2.content
-    elif response1.status_code == 200:  # If the first URL is not working call the 2nd URL
+    if response1.status_code == 200:  # 200 is the universal code which represents perfect working image
         return response1.content
+    elif response2.status_code == 200:  # If the first URL is not working call the 2nd URL
+        return response2.content
     else:
         return None  # If both URLs are not working return None
 
